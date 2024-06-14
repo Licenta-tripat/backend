@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+  server2:
+    build: .
+    environment:
+      - DB_USERNAME=anghel
+      - DB_PASS=!28OcT2001
+      - DB_URL=licentaserver.postgres.database.azure.com
+      - SERVER_PORT=8080
+      - DB_NAME=tripitdb
+      - TOMTOM_KEY=D83lFXeuwBypQmOtG55u8j4yOV18e1AV
+    ports:
+      - "8080:8080"
