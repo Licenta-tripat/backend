@@ -1,19 +1,15 @@
 package com.example.tripit.places.dtos;
 
-import com.example.tripit.places.persistance.models.Place;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class RetrieveItineraryDTO {
-
+public class RetrieveItineraryListDTO {
     private Integer id;
 
     private Integer noDays;
@@ -23,6 +19,4 @@ public class RetrieveItineraryDTO {
     private String locationId;
 
     private String startingDate;
-
-    private List<Place> places;
 }

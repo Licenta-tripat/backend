@@ -15,6 +15,7 @@ public class ItineraryFactoryImpl implements ItineraryFactory {
         itinerary.setNoDays(itineraryDTO.getNoDays());
         itinerary.setOwner(user);
         itinerary.setLocationName(itineraryDTO.getLocationName());
+        itinerary.setLocationId(itineraryDTO.getLocationId());
         itinerary.setStartDate(itineraryDTO.getStartingDate());
         return itinerary;
     }

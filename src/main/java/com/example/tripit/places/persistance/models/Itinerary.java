@@ -20,6 +20,9 @@ public class Itinerary {
     @Column(name = "no_days")
     private Integer noDays;
 
+    @Column(name = "location_id")
+    private String locationId;
+
     @Column(name = "location_name")
     private String locationName;
 

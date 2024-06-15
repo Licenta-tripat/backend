@@ -1,5 +1,6 @@
 package com.example.tripit.places.services;
 
+import com.example.tripit.places.dtos.RetrieveItineraryListDTO;
 import com.example.tripit.places.persistance.models.Itinerary;
 import com.example.tripit.places.persistance.models.Place;
 import com.example.tripit.core.persistance.models.User;
@@ -16,7 +17,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ItineraryServiceImpl implements ItineraryService{
+public class ItineraryServiceImpl implements ItineraryService {
 
     private final PlacesService placeService;
 
@@ -31,7 +32,7 @@ public class ItineraryServiceImpl implements ItineraryService{
     @Override
     public Integer createItinerary(CreateItineraryDTO itineraryDTO, Long userId) {
         User user = webServiceFacade.getUserById(userId);
-        if(user == null) {
+        if (user == null) {
             throw new RuntimeException("User not found!");
         }
         try {
@@ -47,7 +48,7 @@ public class ItineraryServiceImpl implements ItineraryService{
     @Override
     public RetrieveItineraryDTO getItinerary(Integer id) {
         Itinerary itinerary = itineraryRepository.findById(id).orElse(null);
-        if(itinerary == null) {
+        if (itinerary == null) {
             throw new RuntimeException("Itinerary not found!");
         }
         List<Place> places = placeService.getPlacesByItinerary(itinerary);
@@ -61,10 +62,19 @@ public class ItineraryServiceImpl implements ItineraryService{
     @Transactional
     public void deleteItinerary(Integer id) {
         Itinerary itinerary = itineraryRepository.findById(id).orElse(null);
-        if(itinerary == null) {
+        if (itinerary == null) {
             throw new RuntimeException("Itinerary not found!");
         }
         placeService.deletePlacesByItinerary(itinerary);
         itineraryRepository.delete(itinerary);
+    }
+
+    @Override
+    public List<RetrieveItineraryListDTO> getItinerariesAfterCurrentDate(String date, Long userId) {
+        User user = webServiceFacade.getUserById(userId);
+        if (user == null) {
+            throw new RuntimeException("User not found!");
+        }
+        return itineraryTranslator.translateToRetrieveItineraryListDTO(itineraryRepository.findByStartDateAfterAndOwner(date, user));
     }
 }

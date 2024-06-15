@@ -21,6 +21,9 @@ public class CreateItineraryDTO {
     @JsonProperty("location")
     private String locationName;
 
+    @JsonProperty("location_id")
+    private String locationId;
+
     @JsonProperty("places")
     private List<PlaceDTO> places;
 
