@@ -16,5 +16,5 @@ public interface ItineraryService {
 
     void deleteItinerary(Integer id);
 
-    List<RetrieveItineraryListDTO> getItinerariesAfterCurrentDate(String date, Long userId);
+    List<RetrieveItineraryListDTO> getItinerariesAfterCurrentDate(String currDate, Long userId);
 }

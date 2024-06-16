@@ -33,6 +33,9 @@ public class Itinerary {
     @Column(name = "start_date")
     private String startDate;
 
+    @Column(name = "end_date")
+    private String endDate;
+
     @Column(name = "photo_reference")
     private String photoReference;
 }

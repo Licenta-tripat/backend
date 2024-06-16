@@ -30,6 +30,9 @@ public class CreateItineraryDTO {
     @JsonProperty("starting_date")
     private String startingDate;
 
+    @JsonProperty("ending_date")
+    private String endingDate;
+
     @JsonProperty("photo_reference")
     private String photoReference;
 }
