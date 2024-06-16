@@ -25,4 +25,6 @@ public class RetrieveItineraryDTO {
     private String startingDate;
 
     private List<Place> places;
+
+    private String photoReference;
 }
