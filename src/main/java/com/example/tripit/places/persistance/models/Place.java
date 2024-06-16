@@ -17,6 +17,9 @@ public class Place {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(name = "place_id")
+    private String placeId;
+
     @Column(name = "type")
     private String type;
 
