@@ -1,6 +1,5 @@
 package com.example.tripit.places.dtos;
 
-import com.example.tripit.places.persistance.models.Place;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,7 +25,7 @@ public class RetrieveItineraryDTO {
 
     private String endingDate;
 
-    private List<Place> places;
+    private List<RetrievePlaceDTO> places;
 
     private String photoReference;
 }

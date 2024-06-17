@@ -1,6 +1,7 @@
 package com.example.tripit.places.mappers.translator;
 
 import com.example.tripit.places.dtos.RetrieveItineraryListDTO;
+import com.example.tripit.places.dtos.RetrievePlaceDTO;
 import com.example.tripit.places.persistance.models.Itinerary;
 import com.example.tripit.places.persistance.models.Place;
 import com.example.tripit.places.dtos.RetrieveItineraryDTO;
@@ -15,7 +16,7 @@ import java.util.List;
 public class ItineraryTranslatorImpl implements ItineraryTranslator {
 
     @Override
-    public RetrieveItineraryDTO translateToRetrievePlaceDTO(List<Place> places, Itinerary itinerary) {
+    public RetrieveItineraryDTO translateToRetrieveItineraryDTO(List<RetrievePlaceDTO> places, Itinerary itinerary) {
         RetrieveItineraryDTO retrieveItineraryDTO = new RetrieveItineraryDTO();
         retrieveItineraryDTO.setId(itinerary.getId());
         retrieveItineraryDTO.setNoDays(itinerary.getNoDays());

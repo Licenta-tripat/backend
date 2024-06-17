@@ -1,6 +1,8 @@
 package com.example.tripit.places.services;
 
 import com.example.tripit.places.dtos.RetrieveItineraryListDTO;
+import com.example.tripit.places.dtos.RetrievePlaceDTO;
+import com.example.tripit.places.mappers.translator.PlaceTranslator;
 import com.example.tripit.places.persistance.models.Itinerary;
 import com.example.tripit.places.persistance.models.Place;
 import com.example.tripit.core.persistance.models.User;
@@ -31,6 +33,8 @@ public class ItineraryServiceImpl implements ItineraryService {
 
     private final WebServiceFacade webServiceFacade;
 
+    private final PlaceTranslator placeTranslator;
+
     @Override
     public Integer createItinerary(CreateItineraryDTO itineraryDTO, Long userId) {
         User user = webServiceFacade.getUserById(userId);
@@ -57,7 +61,8 @@ public class ItineraryServiceImpl implements ItineraryService {
         if (places.isEmpty()) {
             throw new RuntimeException("Places not found!");
         }
-        return itineraryTranslator.translateToRetrievePlaceDTO(places, itinerary);
+        List<RetrievePlaceDTO> placesDto = placeTranslator.translateToRetrievePlaceDTO(places);
+        return itineraryTranslator.translateToRetrieveItineraryDTO(placesDto, itinerary);
     }
 
     @Override

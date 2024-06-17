@@ -23,6 +23,7 @@ public class PlaceFactoryImpl implements PlaceFactory{
             place.setType(placeDTO.getType());
             place.setItinerary(itinerary);
             place.setPlaceId(placeDTO.getId());
+            place.setWebsite(placeDTO.getPoi().getUrl());
             return place;
         }).toList();
     }

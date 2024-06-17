@@ -41,6 +41,9 @@ public class Place {
     @Column(name = "visited")
     private boolean visited = false;
 
+    @Column(name = "website")
+    private String website;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "itinerary_id")
     private Itinerary itinerary;
