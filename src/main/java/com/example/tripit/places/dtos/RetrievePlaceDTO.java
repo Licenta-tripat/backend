@@ -24,4 +24,8 @@ public class RetrievePlaceDTO {
     private double lon;
 
     private boolean visited;
+
+    private String website;
+
+    private Integer duration;
 }

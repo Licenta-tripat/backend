@@ -44,8 +44,17 @@ public class Place {
     @Column(name = "website")
     private String website;
 
+    @Column(name = "duration")
+    private Integer duration;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "itinerary_id")
     private Itinerary itinerary;
+
+    @Column(name = "day")
+    private Integer day;
+
+    @Column(name = "position")
+    private Integer position;
 }
 
