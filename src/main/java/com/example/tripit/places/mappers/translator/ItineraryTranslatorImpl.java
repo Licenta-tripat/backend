@@ -26,6 +26,7 @@ public class ItineraryTranslatorImpl implements ItineraryTranslator {
         retrieveItineraryDTO.setStartingDate(itinerary.getStartDate());
         retrieveItineraryDTO.setPhotoReference(itinerary.getPhotoReference());
         retrieveItineraryDTO.setEndingDate(itinerary.getEndDate());
+        retrieveItineraryDTO.setLocationsNumber(itinerary.getLocationsNumber());
         return retrieveItineraryDTO;
     }
 
@@ -41,6 +42,7 @@ public class ItineraryTranslatorImpl implements ItineraryTranslator {
                     retrieveItineraryListDTO.setStartingDate(itinerary.getStartDate());
                     retrieveItineraryListDTO.setPhotoReference(itinerary.getPhotoReference());
                     retrieveItineraryListDTO.setEndingDate(itinerary.getEndDate());
+                    retrieveItineraryListDTO.setLocationsNumber(itinerary.getLocationsNumber());
                     return retrieveItineraryListDTO;
                 })
                 .sorted(Comparator.comparing(RetrieveItineraryListDTO::getStartingDate))

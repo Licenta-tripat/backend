@@ -28,4 +28,6 @@ public class RetrieveItineraryDTO {
     private List<RetrievePlaceDTO> places;
 
     private String photoReference;
+
+    private Integer locationsNumber;
 }

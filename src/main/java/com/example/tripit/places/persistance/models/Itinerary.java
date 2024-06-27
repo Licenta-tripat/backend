@@ -38,4 +38,7 @@ public class Itinerary {
 
     @Column(name = "photo_reference")
     private String photoReference;
+
+    @Column(name = "locations_number")
+    private int locationsNumber;
 }
