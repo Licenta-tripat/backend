@@ -40,5 +40,5 @@ public class Itinerary {
     private String photoReference;
 
     @Column(name = "locations_number")
-    private int locationsNumber;
+    private Integer locationsNumber;
 }

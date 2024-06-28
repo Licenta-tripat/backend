@@ -1,14 +1,13 @@
 package com.example.tripit.places.services;
 
-import com.example.tripit.places.dtos.RetrieveItineraryListDTO;
-import com.example.tripit.places.dtos.RetrievePlaceDTO;
+import com.example.tripit.places.dtos.*;
 import com.example.tripit.places.mappers.translator.PlaceTranslator;
+import com.example.tripit.places.persistance.models.CommunityItinerary;
 import com.example.tripit.places.persistance.models.Itinerary;
 import com.example.tripit.places.persistance.models.Place;
 import com.example.tripit.core.persistance.models.User;
+import com.example.tripit.places.persistance.repositories.CommunityItineraryRepository;
 import com.example.tripit.places.persistance.repositories.ItineraryRepository;
-import com.example.tripit.places.dtos.CreateItineraryDTO;
-import com.example.tripit.places.dtos.RetrieveItineraryDTO;
 import com.example.tripit.places.mappers.factory.ItineraryFactory;
 import com.example.tripit.places.mappers.translator.ItineraryTranslator;
 import jakarta.transaction.Transactional;
@@ -17,7 +16,9 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -34,6 +35,8 @@ public class ItineraryServiceImpl implements ItineraryService {
     private final WebServiceFacade webServiceFacade;
 
     private final PlaceTranslator placeTranslator;
+
+    private final CommunityItineraryRepository communityItineraryRepository;
 
     @Override
     public Integer createItinerary(CreateItineraryDTO itineraryDTO, Long userId) {
@@ -84,5 +87,35 @@ public class ItineraryServiceImpl implements ItineraryService {
         }
 
         return itineraryTranslator.translateToRetrieveItineraryListDTO(itineraryRepository.findByEndDateAfterAndOwner(currDate, user));
+    }
+
+    @Override
+    public void saveCommunityItinerary(CommunityItineraryDTO communityItineraryDTO) {
+        User user = webServiceFacade.getUserById(communityItineraryDTO.getPublisherId());
+        if (user == null) {
+            throw new RuntimeException("User not found!");
+        }
+        CommunityItinerary communityItinerary = itineraryFactory.getCommunityItineraryFromCommunityItineraryDTO(communityItineraryDTO, user);
+
+        communityItineraryRepository.save(communityItinerary);
+    }
+
+    @Override
+    public List<RetrieveCommunityItineraryDTO> getCommunityItineraries() {
+        List<CommunityItinerary> communityItineraries = communityItineraryRepository.findAll().stream().sorted(Comparator.comparing(CommunityItinerary::getPublishDate).reversed())
+                .collect(Collectors.toList());
+        if (communityItineraries.isEmpty()) {
+            throw new RuntimeException("Community itineraries not found!");
+        }
+
+        List<Integer> itineraryIds = communityItineraries.stream()
+                .map(CommunityItinerary::getItineraryId)
+                .toList();
+
+        List<Itinerary> itineraries = itineraryRepository.findAll().stream()
+                .filter(itinerary -> itineraryIds.contains(itinerary.getId()))
+                .toList();
+
+        return itineraryTranslator.translateToDTO(communityItineraries, itineraries);
     }
 }
