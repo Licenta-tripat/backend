@@ -13,4 +13,6 @@ import java.util.List;
 @Repository
 public interface ItineraryRepository extends JpaRepository<Itinerary, Integer> {
     List<Itinerary> findByEndDateAfterAndOwner(String date, User owner);
+
+    List<Itinerary> findByEndDateBeforeAndOwner(String date, User owner);
 }

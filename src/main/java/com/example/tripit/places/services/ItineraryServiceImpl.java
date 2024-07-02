@@ -90,6 +90,16 @@ public class ItineraryServiceImpl implements ItineraryService {
     }
 
     @Override
+    public List<RetrieveItineraryListDTO> getItinerariesBeforeCurrentDate(String currDate, Long userId) {
+        User user = webServiceFacade.getUserById(userId);
+        if (user == null) {
+            throw new RuntimeException("User not found!");
+        }
+
+        return itineraryTranslator.translateToRetrieveItineraryListDTO(itineraryRepository.findByEndDateBeforeAndOwner(currDate, user));
+    }
+
+    @Override
     public void saveCommunityItinerary(CommunityItineraryDTO communityItineraryDTO) {
         User user = webServiceFacade.getUserById(communityItineraryDTO.getPublisherId());
         if (user == null) {

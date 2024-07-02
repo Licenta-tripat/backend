@@ -16,6 +16,8 @@ public interface ItineraryService {
 
     List<RetrieveItineraryListDTO> getItinerariesAfterCurrentDate(String currDate, Long userId);
 
+    List<RetrieveItineraryListDTO> getItinerariesBeforeCurrentDate(String currDate, Long userId);
+
     void saveCommunityItinerary(CommunityItineraryDTO communityItineraryDTO);
 
     List<RetrieveCommunityItineraryDTO> getCommunityItineraries();

@@ -22,6 +22,8 @@ public class PlaceTranslatorImpl implements PlaceTranslator{
             retrievePlaceDTO.setLat(place.getLat());
             retrievePlaceDTO.setVisited(place.isVisited());
             retrievePlaceDTO.setDuration(place.getDuration());
+            retrievePlaceDTO.setDay(place.getDay());
+            retrievePlaceDTO.setPosition(place.getPosition());
             return retrievePlaceDTO;
         }).toList();
     }

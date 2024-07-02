@@ -28,4 +28,8 @@ public class RetrievePlaceDTO {
     private String website;
 
     private Integer duration;
+
+    private Integer day;
+
+    private Integer position;
 }

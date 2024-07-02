@@ -36,14 +36,8 @@ public class ItineraryController {
         return ResponseEntity.ok(itineraryService.getItinerariesAfterCurrentDate(date, id));
     }
 
-    @PostMapping("/community")
-    public ResponseEntity<Void> saveCommunityItinerary(@RequestBody CommunityItineraryDTO communityItineraryDTO) {
-        itineraryService.saveCommunityItinerary(communityItineraryDTO);
-        return ResponseEntity.ok().build();
-    }
-
-    @GetMapping("/community")
-    public ResponseEntity<List<RetrieveCommunityItineraryDTO>> getCommunityItineraries() {
-        return ResponseEntity.ok(itineraryService.getCommunityItineraries());
+    @GetMapping("/before/{date}/{id}")
+    public ResponseEntity<List<RetrieveItineraryListDTO>> getItinerariesBeforeCurrentDate(@PathVariable("date") String date, @PathVariable("id") Long id) {
+        return ResponseEntity.ok(itineraryService.getItinerariesBeforeCurrentDate(date, id));
     }
 }

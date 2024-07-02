@@ -37,7 +37,7 @@ public class SpringSecurity {
             try {
                 csrf.disable()
                         .authorizeHttpRequests((authorize) -> authorize
-                                .requestMatchers("/auth/**", "/places/**", "/categories/**", "/itinerary/**").permitAll()
+                                .requestMatchers("/auth/**", "/places/**", "/categories/**", "/itinerary/**", "/community/**").permitAll()
                                 .requestMatchers("/admin/**").hasAnyAuthority("ADMIN")
                                 .anyRequest().authenticated());
             } catch (Exception e) {
